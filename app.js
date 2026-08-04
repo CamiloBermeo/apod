@@ -1,6 +1,5 @@
-/* ==================================================
-   CALENDARIO APOD - APORTE DE ESTEFANÍA
-   ================================================== */
+const API_KEY = '7Cpbu44pFRppWeV4bJaN4Dargtm12XFUgjazP9MK'
+const URL_ENDPOINT = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
 
 const formulario =
   document.getElementById("formulario-fecha");
@@ -29,7 +28,6 @@ function obtenerFechaActual() {
 
   return `${anio}-${mes}-${dia}`;
 }
-
 
 const FECHA_ACTUAL = obtenerFechaActual();
 
@@ -63,7 +61,6 @@ function actualizarEstado(texto, tipo = "normal") {
     "0 0 0 5px rgba(114, 118, 83, 0.12)";
 }
 
-
 function validarFecha(fecha) {
   if (!fecha) {
     actualizarEstado(
@@ -95,44 +92,34 @@ function validarFecha(fecha) {
   return true;
 }
 
+// date: YYYY-MM-DD
+const getApod = async (date) => {
+  console.log('DAte ', date)
+  const URL_ENDPOINT_DATE = `${URL_ENDPOINT}&date=${date}`
 
-function solicitarApod(fecha) {
-  if (!validarFecha(fecha)) {
-    return;
+  const response = await fetch(URL_ENDPOINT_DATE);
+
+  if (!response.ok) {
+    console.log('response ', response)
+    throw new Error(`Error ${response.status}: no se pudo obtener el APOD`);
   }
 
-  actualizarEstado(
-    `Consultando el registro del ${fecha}...`,
-    "cargando",
-  );
-
-  /*
-   * Este evento entrega la fecha al código principal
-   * encargado de consultar la API de NASA.
-   */
-  document.dispatchEvent(
-    new CustomEvent("apod:buscar-fecha", {
-      detail: {
-        fecha,
-      },
-    }),
-  );
-
-  console.log("Fecha APOD seleccionada:", fecha);
+  const data = await response.json();
+  console.log(data)
+  return data
 }
 
-
-formulario.addEventListener("submit", (evento) => {
+formulario.addEventListener("submit", async (evento) => {
   evento.preventDefault();
 
-  solicitarApod(campoFecha.value);
+  await renderContent(campoFecha.value)
 });
 
 
-botonHoy.addEventListener("click", () => {
+botonHoy.addEventListener("click", async () => {
   campoFecha.value = FECHA_ACTUAL;
 
-  solicitarApod(FECHA_ACTUAL);
+  await renderContent(campoFecha.value)
 });
 
 
@@ -146,7 +133,6 @@ campoFecha.addEventListener("change", () => {
   }
 });
 
-
 document.addEventListener(
   "apod:consulta-completa",
   (evento) => {
@@ -155,3 +141,86 @@ document.addEventListener(
     );
   },
 );
+
+
+const SectionInfo = (info) => {
+  const mediaHTML = info.media_type === 'video'
+    ? `
+      <div class="mediaWrapper">
+        <iframe 
+          src="${info.url}" 
+          title="${info.title}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          onload="this.classList.add('loaded'); this.parentElement.classList.add('loaded')">
+        </iframe>
+      </div>
+    `
+    : `
+      <div class="mediaWrapper">
+        <img 
+          src="${info.hdurl || info.url}" 
+          alt="${info.title}"
+          onload="this.classList.add('loaded'); this.parentElement.classList.add('loaded')">
+      </div>
+    `;
+
+  const creditHTML = info.copyright
+    ? `<span class="credit">Image Credit & Copyright: ${info.copyright}</span>`
+    : `<span class="credit">Image Credit: NASA</span>`;
+
+  return `
+    <div class="sectionInfo">
+      ${mediaHTML}
+
+      <div class="bodyCard">
+        <div class="cardHeader">
+          <span class="date">
+            <i class="fa-regular fa-calendar"></i>
+            ${info.date}
+          </span>
+        </div>
+
+        <h1>${info.title}</h1>
+        ${creditHTML}
+
+        <p>
+          ${info.explanation}
+        </p>
+      </div>
+    </div>
+  `
+}
+
+const LoadingState = () => `
+  <div class="sectionInfo loading">
+    <p>Cargando imagen del día...</p>
+  </div>
+`;
+
+const ErrorState = (message) => `
+  <div class="sectionInfo error">
+    <p>${message}</p>
+  </div>
+`;
+
+const renderContent = async (date) => {
+  const sectionInfo = document.getElementById('sectionInfo');
+
+  sectionInfo.innerHTML = LoadingState();
+
+  try {
+    const data = await getApod(date);
+
+    sectionInfo.innerHTML = SectionInfo(data);
+
+  } catch (error) {
+    console.error(error);
+    sectionInfo.innerHTML = ErrorState(error.message);
+  }
+}
+
+const today = new Date().toISOString().split('T')[0];
+
+renderContent(today);
