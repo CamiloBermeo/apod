@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+/* ==================================================
+   calendar
+   ================================================== */
+
 :root {
   --fondo: #2a1e18;
   --papel: #eee1ce;
@@ -603,6 +607,83 @@ footer a {
     font-size: 16px;
   }
 }
+
+/* ------------STYLE FAVORITOS--------------------------------- */
+
+.contenedor-favoritos {
+    padding: 2rem 1rem;
+}
+
+.seccion-favoritos {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.titulo-favoritos {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tarjeta-favorito {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-favorito:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+}
+
+.imagen-favorito {
+    height: 240px;
+    object-fit: cover;
+}
+
+.cuerpo-favorito {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem;
+}
+
+.descripcion-favorito {
+    margin: 0;
+    color: #4b5563;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.boton-quitar-favorito {
+    width: 100%;
+    border-radius: 12px;
+    background: #dc3545;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.boton-quitar-favorito:hover {
+    background: #bb2d3b;
+    color: #ffffff;
+}
+
+@media (max-width: 767px) {
+    .titulo-favoritos {
+        font-size: 1.6rem;
+    }
+
+    .imagen-favorito {
+        height: 220px;
+    }
+}
+
+/* ------------STYLE FAVORITOS ----------------------------------*/
 
 @media (max-width: 640px) {
   .bodyCard {
