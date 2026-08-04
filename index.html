@@ -1,11 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>apod</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Calendario APOD</title>
+
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./app.js" defer></script>
+  </head>
+
+  <body>
+    <main class="pagina-calendario">
+      <section
+        class="calendario-vintage"
+        aria-labelledby="titulo-calendario"
+      >
+        <!-- Esquinas decorativas -->
+        <span
+          class="esquina esquina-superior"
+          aria-hidden="true"
+        ></span>
+
+        <span
+          class="esquina esquina-inferior"
+          aria-hidden="true"
+        ></span>
+
+        <!-- Encabezado -->
+        <header class="calendario-encabezado">
+          <div>
+            <p class="calendario-etiqueta">
+              Consulta histórica
+            </p>
+
+            <h1 id="titulo-calendario">
+              Selecciona la fecha
+            </h1>
+          </div>
+
+          <span class="simbolo-celeste" aria-hidden="true">
+            ✦
+          </span>
+        </header>
+
+        <div class="linea-decorativa"></div>
+
+        <!-- Formulario -->
+        <form id="formulario-fecha" class="formulario-fecha">
+          <div class="campo-fecha">
+            <label for="fecha-apod">
+              Fecha del registro
+            </label>
+
+            <input
+              id="fecha-apod"
+              name="fecha"
+              type="date"
+              min="1995-06-16"
+              required
+            />
+
+            <small>
+              Registros disponibles desde el 16 de junio de 1995.
+            </small>
+          </div>
+
+          <button class="boton-descubrir" type="submit">
+            <span>Descubrir el cielo</span>
+            <span class="flecha" aria-hidden="true">→</span>
+          </button>
+
+          <button
+            class="boton-hoy"
+            id="boton-fecha-hoy"
+            type="button"
+          >
+            Consultar la imagen de hoy
+          </button>
+        </form>
+
+        <!-- Estado -->
+        <footer class="calendario-estado">
+          <span
+            class="estado-indicador"
+            id="estado-indicador"
+            aria-hidden="true"
+          ></span>
+
+          <p
+            id="mensaje-fecha"
+            role="status"
+            aria-live="polite"
+          >
+            El archivo está listo para explorar.
+          </p>
+        </footer>
+      </section>
+    </main>
+  </body>
 </html>

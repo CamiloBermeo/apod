@@ -1,0 +1,476 @@
+/* ==================================================
+   calendar
+   ================================================== */
+
+:root {
+  --fondo: #2a1e18;
+  --papel: #eee1ce;
+  --papel-claro: #f8f1e7;
+  --naranja: #b45d38;
+  --naranja-oscuro: #93462c;
+  --terracota: #a95737;
+  --cafe: #44271c;
+  --texto: #5d3728;
+  --texto-suave: #76594b;
+  --oliva: #727653;
+  --linea: rgba(93, 55, 40, 0.17);
+}
+
+
+/* ==================================================
+   CONFIGURACIÓN GENERAL
+   ================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+
+  background:
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(180, 93, 56, 0.12),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      #33241d,
+      var(--fondo)
+    );
+
+  color: var(--texto);
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+
+/* ==================================================
+   CENTRAR EL CALENDARIO
+   ================================================== */
+
+.pagina-calendario {
+  display: grid;
+  place-items: center;
+
+  min-height: 100vh;
+  padding: 35px 20px;
+}
+
+
+/* ==================================================
+   TARJETA DEL CALENDARIO
+   ================================================== */
+
+.calendario-vintage {
+  position: relative;
+
+  width: min(405px, 100%);
+  padding: 33px 34px 35px;
+
+  background:
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(180, 93, 56, 0.06),
+      transparent 26%
+    ),
+    linear-gradient(
+      145deg,
+      var(--papel-claro),
+      var(--papel)
+    );
+
+  border: 1px solid rgba(180, 93, 56, 0.35);
+  border-radius: 5px 24px 5px 24px;
+
+  box-shadow:
+    18px 20px 0 rgba(126, 66, 42, 0.2),
+    0 25px 55px rgba(0, 0, 0, 0.3);
+
+  isolation: isolate;
+}
+
+
+/* TEXTURA SUAVE DE PAPEL */
+
+.calendario-vintage::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  opacity: 0.19;
+
+  background-image:
+    repeating-linear-gradient(
+      35deg,
+      transparent 0,
+      transparent 4px,
+      rgba(112, 77, 58, 0.035) 5px
+    );
+
+  border-radius: inherit;
+
+  pointer-events: none;
+}
+
+
+/* SOMBRA NARANJA POSTERIOR */
+
+.calendario-vintage::after {
+  content: "";
+
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: -2;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(180, 93, 56, 0.2);
+
+  border-radius: 5px 24px 5px 24px;
+}
+
+
+/* ==================================================
+   ESQUINAS DECORATIVAS
+   ================================================== */
+
+.esquina {
+  position: absolute;
+
+  width: 26px;
+  height: 26px;
+
+  pointer-events: none;
+}
+
+.esquina-superior {
+  top: 12px;
+  left: 12px;
+
+  border-top: 1px solid var(--naranja);
+  border-left: 1px solid var(--naranja);
+}
+
+.esquina-inferior {
+  right: 12px;
+  bottom: 12px;
+
+  border-right: 1px solid var(--naranja);
+  border-bottom: 1px solid var(--naranja);
+}
+
+
+/* ==================================================
+   ENCABEZADO
+   ================================================== */
+
+.calendario-encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.calendario-etiqueta {
+  margin: 0 0 8px;
+
+  color: var(--naranja);
+
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.calendario-encabezado h1 {
+  margin: 0;
+
+  color: var(--cafe);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: normal;
+  line-height: 1.1;
+}
+
+
+/* SÍMBOLO REDONDO */
+
+.simbolo-celeste {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  width: 46px;
+  height: 46px;
+
+  color: var(--naranja);
+
+  border: 1px solid rgba(180, 93, 56, 0.4);
+  border-radius: 50%;
+
+  font-size: 18px;
+
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.calendario-vintage:hover .simbolo-celeste {
+  background-color: var(--naranja);
+  color: var(--papel-claro);
+
+  transform: rotate(45deg);
+}
+
+
+/* SEPARADOR */
+
+.linea-decorativa {
+  width: 100%;
+  height: 1px;
+
+  margin: 26px 0 30px;
+
+  background: linear-gradient(
+    90deg,
+    var(--linea),
+    rgba(180, 93, 56, 0.3),
+    var(--linea)
+  );
+}
+
+
+/* ==================================================
+   FORMULARIO
+   ================================================== */
+
+.formulario-fecha {
+  margin: 0;
+}
+
+.campo-fecha {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.campo-fecha label {
+  color: var(--naranja-oscuro);
+
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.campo-fecha input {
+  width: 100%;
+  height: 61px;
+  padding: 0 18px;
+
+  background-color: rgba(255, 255, 255, 0.58);
+  color: var(--cafe);
+
+  border: 1px solid rgba(93, 55, 40, 0.24);
+  border-left: 4px solid var(--naranja);
+  border-radius: 0;
+
+  outline: none;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  letter-spacing: 2px;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.campo-fecha input:hover {
+  background-color: rgba(255, 255, 255, 0.78);
+}
+
+.campo-fecha input:focus {
+  background-color: white;
+  border-color: var(--naranja);
+
+  box-shadow: 0 0 0 4px rgba(180, 93, 56, 0.1);
+}
+
+.campo-fecha small {
+  color: var(--texto-suave);
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+
+/* ==================================================
+   BOTONES
+   ================================================== */
+
+.boton-descubrir,
+.boton-hoy {
+  width: 100%;
+  min-height: 53px;
+
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+/* BOTÓN PRINCIPAL */
+
+.boton-descubrir {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 29px;
+  padding: 0 22px;
+
+  background-color: var(--naranja);
+  color: white;
+
+  border: 1px solid var(--naranja);
+}
+
+.boton-descubrir:hover {
+  background-color: var(--naranja-oscuro);
+  border-color: var(--naranja-oscuro);
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 9px 20px rgba(147, 70, 44, 0.2);
+}
+
+.flecha {
+  font-size: 20px;
+
+  transition: transform 0.25s ease;
+}
+
+.boton-descubrir:hover .flecha {
+  transform: translateX(6px);
+}
+
+
+/* BOTÓN SECUNDARIO */
+
+.boton-hoy {
+  margin-top: 11px;
+
+  background-color: transparent;
+  color: var(--naranja-oscuro);
+
+  border: 1px solid rgba(147, 70, 44, 0.32);
+}
+
+.boton-hoy:hover {
+  background-color: rgba(180, 93, 56, 0.08);
+  border-color: var(--naranja);
+
+  transform: translateY(-2px);
+}
+
+
+/* ==================================================
+   ESTADO
+   ================================================== */
+
+.calendario-estado {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  margin-top: 26px;
+  padding-top: 21px;
+
+  border-top: 1px solid var(--linea);
+}
+
+.estado-indicador {
+  flex-shrink: 0;
+
+  width: 8px;
+  height: 8px;
+
+  background-color: var(--oliva);
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 5px rgba(114, 118, 83, 0.12);
+
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.calendario-estado p {
+  min-height: 17px;
+  margin: 0;
+
+  color: var(--texto-suave);
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.calendario-estado p.error {
+  color: var(--naranja-oscuro);
+}
+
+
+/* ==================================================
+   CELULAR
+   ================================================== */
+
+@media (max-width: 480px) {
+  .pagina-calendario {
+    padding: 25px 14px;
+  }
+
+  .calendario-vintage {
+    padding: 30px 24px 32px;
+
+    border-radius: 4px 20px 4px 20px;
+  }
+
+  .calendario-encabezado h1 {
+    font-size: 25px;
+  }
+
+  .simbolo-celeste {
+    width: 42px;
+    height: 42px;
+  }
+
+  .campo-fecha input {
+    font-size: 16px;
+  }
+}
