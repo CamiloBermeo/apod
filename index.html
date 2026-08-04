@@ -11,15 +11,18 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
   <header>
-    <a href="" class="logo">
+    <a href="index.html" class="logo">
       <h1>APOD</h1>
     </a>
-    <a href="favoritos.html" class="favoritos">Favoritos</a>
+    <nav class="nav-header">
+      <a href="index.html" class="nav-link active">Inicio</a>
+      <a href="favoritos.html" class="nav-link">Favoritos</a>
+    </nav>
   </header>
 
   <main id="main" class="main">
@@ -87,8 +90,8 @@
 
   <footer>
     <nav>
-      <a href="">Inicio</a>
-      <a href="">Favoritos</a>
+      <a href="index.html">Inicio</a>
+      <a href="favoritos.html">Favoritos</a>
       <a href="https://github.com/CamiloBermeo/apod" target="_blank">nuestro repositorio</a>
     </nav>
     <div>
@@ -105,7 +108,7 @@
 
   </footer>
 
-  <script src="app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 
 </html>
