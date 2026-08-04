@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>apod</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./camilo.css">
+
 </head>
+
 <body>
-    
+
+    <main class="contenedor-favoritos">
+        <section class="seccion-favoritos">
+            <div class="titulo-favoritos">Favoritos</div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="listaFavoritos">
+                <div class="col">
+                    <article class="card h-100 tarjeta-favorito">
+                        <img src="https://i.pinimg.com/1200x/fb/a7/bd/fba7bd46a22a51f81c9bf3d5fec9f479.jpg"
+                            class="card-img-top imagen-favorito" alt="Imagen favorita 1">
+                        <div class="card-body cuerpo-favorito">
+                            <p class="card-text descripcion-favorito">Descripción breve de la imagen favorita, con un estilo más limpio y ordenado.</p>
+                            <button class="btn boton-quitar-favorito">Quitar de favoritos</button>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col">
+                    <article class="card h-100 tarjeta-favorito">
+                        <img src="https://i.pinimg.com/1200x/fb/a7/bd/fba7bd46a22a51f81c9bf3d5fec9f479.jpg"
+                            class="card-img-top imagen-favorito" alt="Imagen favorita 2">
+                        <div class="card-body cuerpo-favorito">
+                            <p class="card-text descripcion-favorito">Otra imagen guardada en favoritos, lista para ser visualizada con una disposición elegante.</p>
+                            <button class="btn boton-quitar-favorito">Quitar de favoritos</button>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col">
+                    <article class="card h-100 tarjeta-favorito">
+                        <img src="https://i.pinimg.com/1200x/fb/a7/bd/fba7bd46a22a51f81c9bf3d5fec9f479.jpg"
+                            class="card-img-top imagen-favorito" alt="Imagen favorita 3">
+                        <div class="card-body cuerpo-favorito">
+                            <p class="card-text descripcion-favorito">Una tarjeta adicional para mantener el espacio uniforme y ordenado dentro de la galería.</p>
+                            <button class="btn boton-quitar-favorito">Quitar de favoritos</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
