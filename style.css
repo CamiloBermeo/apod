@@ -1,80 +1,9 @@
-/* ------------STYLE FAVORITOS--------------------------------- */
-
-.contenedor-favoritos {
-    padding: 2rem 1rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.seccion-favoritos {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.titulo-favoritos {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.tarjeta-favorito {
-    border: none;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.tarjeta-favorito:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
-}
-
-.imagen-favorito {
-    height: 240px;
-    object-fit: cover;
-}
-
-.cuerpo-favorito {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1.1rem;
-}
-
-.descripcion-favorito {
-    margin: 0;
-    color: #4b5563;
-    text-align: left;
-    line-height: 1.6;
-}
-
-.boton-quitar-favorito {
-    width: 100%;
-    border-radius: 12px;
-    background: #dc3545;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.boton-quitar-favorito:hover {
-    background: #bb2d3b;
-    color: #ffffff;
-}
-
-@media (max-width: 767px) {
-    .titulo-favoritos {
-        font-size: 1.6rem;
-    }
-
-    .imagen-favorito {
-        height: 220px;
-    }
-}
-
-
-/* ------------STYLE FAVORITOS ----------------------------------*/
 /* ==================================================
    calendar
    ================================================== */
@@ -93,53 +22,188 @@
   --linea: rgba(93, 55, 40, 0.17);
 }
 
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #1a1f35;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
 
-/* ==================================================
-   CONFIGURACIÓN GENERAL
-   ================================================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #1a1f35;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px)
+}
 
-* {
+.favoritos {
+  color: white;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.5rem;
+  padding: 0 1rem;
   box-sizing: border-box;
 }
 
-body {
-  min-height: 100vh;
-  margin: 0;
-
-  background:
-    radial-gradient(
-      circle at 20% 15%,
-      rgba(180, 93, 56, 0.12),
-      transparent 27%
-    ),
-    linear-gradient(
-      145deg,
-      #33241d,
-      var(--fondo)
-    );
-
-  color: var(--texto);
-
-  font-family: Arial, Helvetica, sans-serif;
+.sectionInfo {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-button,
-input {
-  font: inherit;
+.mediaWrapper {
+  width: 100%;
+  max-height: 480px;
+  overflow: hidden;
+  background: #000;
 }
 
-
-/* ==================================================
-   CENTRAR EL CALENDARIO
-   ================================================== */
-
-.pagina-calendario {
-  display: grid;
-  place-items: center;
-
-  min-height: 100vh;
-  padding: 35px 20px;
+.mediaWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
+
+.bodyCard {
+  padding: 2rem;
+  color: #e5e7eb;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+.icon-calendar {
+  opacity: 0.7;
+}
+
+.bodyCard h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+
+.credit {
+  display: block;
+  font-style: italic;
+  color: #9ca3af;
+  margin-bottom: 1.5rem;
+}
+
+.bodyCard p {
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+/** Para mantener un fallback en la img */
+.mediaWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(90deg, #1a1f35 25%, #232a45 50%, #1a1f35 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+.mediaWrapper img,
+.mediaWrapper iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.mediaWrapper img.loaded,
+.mediaWrapper iframe.loaded {
+  opacity: 1;
+}
+
+.mediaWrapper.loaded {
+  animation: none;
+  background: none;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+footer {
+  color: white;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-top: 3px solid rgba(255, 255, 255, 0.08);
+}
+
+footer nav {
+  display: flex;
+  gap: 20px;
+}
+
+footer div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+footer ul {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+footer a {
+  text-decoration: none;
+  color: rgb(166, 54, 223);
+}
+
 
 
 /* ==================================================
@@ -153,16 +217,12 @@ input {
   padding: 33px 34px 35px;
 
   background:
-    radial-gradient(
-      circle at 90% 8%,
+    radial-gradient(circle at 90% 8%,
       rgba(180, 93, 56, 0.06),
-      transparent 26%
-    ),
-    linear-gradient(
-      145deg,
+      transparent 26%),
+    linear-gradient(145deg,
       var(--papel-claro),
-      var(--papel)
-    );
+      var(--papel));
 
   border: 1px solid rgba(180, 93, 56, 0.35);
   border-radius: 5px 24px 5px 24px;
@@ -187,12 +247,10 @@ input {
   opacity: 0.19;
 
   background-image:
-    repeating-linear-gradient(
-      35deg,
+    repeating-linear-gradient(35deg,
       transparent 0,
       transparent 4px,
-      rgba(112, 77, 58, 0.035) 5px
-    );
+      rgba(112, 77, 58, 0.035) 5px);
 
   border-radius: inherit;
 
@@ -322,12 +380,10 @@ input {
 
   margin: 26px 0 30px;
 
-  background: linear-gradient(
-    90deg,
-    var(--linea),
-    rgba(180, 93, 56, 0.3),
-    var(--linea)
-  );
+  background: linear-gradient(90deg,
+      var(--linea),
+      rgba(180, 93, 56, 0.3),
+      var(--linea));
 }
 
 
@@ -549,5 +605,98 @@ input {
 
   .campo-fecha input {
     font-size: 16px;
+  }
+}
+
+/* ------------STYLE FAVORITOS--------------------------------- */
+
+.contenedor-favoritos {
+    padding: 2rem 1rem;
+}
+
+.seccion-favoritos {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.titulo-favoritos {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tarjeta-favorito {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-favorito:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+}
+
+.imagen-favorito {
+    height: 240px;
+    object-fit: cover;
+}
+
+.cuerpo-favorito {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem;
+}
+
+.descripcion-favorito {
+    margin: 0;
+    color: #4b5563;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.boton-quitar-favorito {
+    width: 100%;
+    border-radius: 12px;
+    background: #dc3545;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.boton-quitar-favorito:hover {
+    background: #bb2d3b;
+    color: #ffffff;
+}
+
+@media (max-width: 767px) {
+    .titulo-favoritos {
+        font-size: 1.6rem;
+    }
+
+    .imagen-favorito {
+        height: 220px;
+    }
+}
+
+/* ------------STYLE FAVORITOS ----------------------------------*/
+
+@media (max-width: 640px) {
+  .bodyCard {
+    padding: 1.25rem;
+  }
+
+  .bodyCard h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
   }
 }
