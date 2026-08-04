@@ -2,17 +2,6 @@ const API_KEY = '7Cpbu44pFRppWeV4bJaN4Dargtm12XFUgjazP9MK'
 const URL_ENDPOINT = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
 const btnAgregarFavoritos = document.getElementById('btn-agregar-favoritos')
 
-btnAgregarFavoritos.addEventListener("click", async ()=>{
-  try{
-    const infoApod = await getApod();
-    const favoritos = JSON.parse(localStorage.getItem("favoritos"))|| [];
-    favoritos.push(infoApod);
-    localStorage.setItem("favoritos", JSON.stringify(favoritos))
-    alert("Añadido a favoritos")
-  } catch(error){
-
-  };
-});
 /* ==================================================
    CALENDARIO APOD - APORTE DE ESTEFANÍA
    ================================================== */
@@ -158,7 +147,6 @@ document.addEventListener(
   },
 );
 
-
 const SectionInfo = (info) => {
   const mediaHTML = info.media_type === 'video'
     ? `
@@ -205,6 +193,8 @@ const SectionInfo = (info) => {
           ${info.explanation}
         </p>
       </div>
+
+      <button id="btn-agregar-favoritos" class="favorito" data-id="${info.date}">Agregar a Favorito</button>
     </div>
   `
 }
@@ -240,3 +230,16 @@ const renderContent = async (date) => {
 const today = new Date().toISOString().split('T')[0];
 
 renderContent(today);
+
+btnAgregarFavoritos.addEventListener("click", async () => {
+  try {
+    const id = boton.dataset.id;
+    console.log('id ', id)
+    const infoApod = await getApod(id);
+    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    favoritos.push(infoApod);
+    localStorage.setItem("favoritos", JSON.stringify(favoritos))
+    alert("Añadido a favoritos")
+  } catch (error) {
+  };
+});
