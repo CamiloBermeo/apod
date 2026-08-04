@@ -1,6 +1,6 @@
 URL Deploy = https://camilobermeo.github.io/apod/
 
-#Integrantes
+# Integrantes
 
 ## Angélica García
 ## Camilo Bermeo
