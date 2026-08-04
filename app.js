@@ -192,9 +192,10 @@ const SectionInfo = (info) => {
         <p>
           ${info.explanation}
         </p>
+
+        <button id="btn-agregar-favoritos" class="favorito" data-id="${info.date}">Agregar a Favorito</button>
       </div>
 
-      <button id="btn-agregar-favoritos" class="favorito" data-id="${info.date}">Agregar a Favorito</button>
     </div>
   `
 }
