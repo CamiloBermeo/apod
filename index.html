@@ -1,11 +1,167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>apod</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <meta
+      name="description"
+      content="Explorador de la imagen astronómica del día de NASA"
+    />
+
+    <title>Archivo Celeste | NASA APOD</title>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <script type="module" src="./app.js" defer></script>
+  </head>
+
+  <body>
+    <header class="cabecera">
+      <a href="#" class="marca">
+        <span class="marca-simbolo" aria-hidden="true">✦</span>
+
+        <span>
+          Archivo
+          <strong>Celeste</strong>
+        </span>
+      </a>
+
+      <p>Astronomy Picture of the Day</p>
+    </header>
+
+    <main>
+      <!-- INICIO DEL CALENDARIO -->
+
+      <section
+        class="explorador"
+        aria-labelledby="titulo-explorador"
+      >
+        <div class="decoracion-orbita" aria-hidden="true">
+          <span></span>
+        </div>
+
+        <div class="explorador-presentacion">
+          <p class="sobretitulo">Archivo astronómico</p>
+
+          <h1 id="titulo-explorador">
+            Descubre los días
+            <em>Universo.</em>
+          </h1>
+
+          <p class="introduccion">
+            Explora el archivo visual de la NASA y descubre qué
+            historia del cosmos fue publicada en una fecha especial.
+          </p>
+
+          <dl class="datos-archivo">
+            <div>
+              <dt>Desde</dt>
+              <dd>1995</dd>
+            </div>
+
+            <div>
+              <dt>Fuente</dt>
+              <dd>NASA APOD</dd>
+            </div>
+
+            <div>
+              <dt>Consulta</dt>
+              <dd>Una fecha</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="calendario">
+          <div class="calendario-superior">
+            <div>
+              <p>Consulta histórica</p>
+              <h2>Selecciona la fecha</h2>
+            </div>
+
+            <span class="calendario-estrella" aria-hidden="true">
+              ✦
+            </span>
+          </div>
+
+          <form id="formulario-fecha">
+            <div class="campo">
+              <label for="fecha-apod">Fecha del registro</label>
+
+              <input
+                id="fecha-apod"
+                name="fecha"
+                type="date"
+                min="1995-06-16"
+                required
+              />
+
+              <small>
+                Registros disponibles desde el 16 de junio de 1995.
+              </small>
+            </div>
+
+            <button class="boton-consultar" type="submit">
+              <span>Descubrir el cielo</span>
+              <span aria-hidden="true">→</span>
+            </button>
+
+            <button
+              class="boton-hoy"
+              id="boton-fecha-hoy"
+              type="button"
+            >
+              Consultar la imagen de hoy
+            </button>
+          </form>
+
+          <div class="estado-calendario">
+            <span class="estado-indicador" aria-hidden="true"></span>
+
+            <p id="mensaje-fecha" role="status" aria-live="polite">
+              El archivo está listo para explorar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULTADO DE NASA -->
+
+      <section
+        class="resultado"
+        id="resultado-apod"
+        aria-live="polite"
+        hidden
+      >
+        <div class="resultado-multimedia" id="apod-multimedia"></div>
+
+        <article class="resultado-contenido">
+          <div class="resultado-meta">
+            <span id="apod-fecha"></span>
+            <span>NASA APOD</span>
+          </div>
+
+          <h2 id="apod-titulo"></h2>
+
+          <p id="apod-copyright" class="resultado-autor"></p>
+
+          <div class="resultado-linea"></div>
+
+          <p id="apod-explicacion" class="resultado-explicacion"></p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <span>✦</span>
+
+      <p>
+        Proyecto académico desarrollado con NASA Open APIs.
+      </p>
+    </footer>
+  </body>
 </html>
